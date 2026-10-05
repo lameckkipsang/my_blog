@@ -9,7 +9,7 @@
     <div class="bg-white p-6 rounded-lg shadow border border-gray-200">
         <h1 class="text-xl font-bold text-gray-800 mb-2">{{ post.title|capfirst }}</h1>
         <p class="text-gray-600 mb-4">{{ post.content|capfirst|truncatechars:30 }}</p>
-        <a href="{% url 'blog_detail' post.slug %}" class="text-yellow-500 font-semibold hover:underline">Read More</a>
+        <a href="{% url 'blog_detail' post.id %}" class="text-yellow-500 font-semibold hover:underline">Read More</a>
     </div>
     {% endfor %}
 </div>
