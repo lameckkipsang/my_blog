@@ -19,10 +19,14 @@ from django.urls import path, include
 from django.conf.urls import handler404
 from django_registration.backends.one_step.views import RegistrationView
 from django.contrib.auth import views as auth_view
+from two_factor.urls import urlpatterns as two_factor_urlpatterns
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blogs.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('', include((two_factor_urlpatterns[0], 'two_factor'), namespace='two_factor')),
     path('school/', include('school.urls')),
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
