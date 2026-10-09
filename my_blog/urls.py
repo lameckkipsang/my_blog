@@ -16,8 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include 
+from django.conf.urls import handler404
+from django_registration.backends.one_step.views import RegistrationView
+from django.contrib.auth import views as auth_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blogs.urls')),
+    path('school/', include('school.urls')),
+    path('accounts/', include('django_registration.backends.one_step.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/reset/<uidb64>/<token>/', auth_view.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'),name='password_reset_confirm'),
+    path('accounts/reset/done/',auth_view.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),name='password_reset_complete'),
+    
 ]
+
+urlpatterns += [
+    path('logout/', auth_view.LogoutView.as_view(), name='logout'),
+]
+
+handler404='blogs.views.error_404_view'

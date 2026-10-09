@@ -4,5 +4,16 @@
         <li><a href="{% url 'about' %}" class="hover:text-blue-600">About</a></li>
         <li><a href="{% url 'contact' %}" class="hover:text-blue-600">Contact</a></li>
         <li><a href="{% url 'blogs' %}" class="hover:text-blue-600">Blogs</a></li>
+        
+        {% if user.is_authenticated %}
+            <li>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="text-black hover:text-gray-300">Logout</button>
+                </form>
+            </li>
+        {% else %}
+            <li><a href="{% url 'login' %}" class="text-black hover:text-gray-300">Login</a></li>
+        {% endif %}
     </ul>
 </nav>
